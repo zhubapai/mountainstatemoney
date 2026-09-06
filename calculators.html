@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculators — Mountain State Money</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+      <path d="M2 20 L8 10 L12 15 L17 6 L24 20 Z" stroke="#C98A2C" stroke-width="1.6" fill="none" stroke-linejoin="round"/>
+    </svg>
+    Mountain State Money
+  </a>
+  <nav>
+    <a href="learn.html">Learn</a>
+    <a href="videos.html">Videos</a>
+    <a href="calculators.html" class="active">Calculators</a>
+    <a href="about.html">About</a>
+  </nav>
+  <button class="nav-toggle" aria-label="Menu">☰</button>
+</header>
+
+<div class="page-banner">
+  <div class="wrap">
+    <h1>Calculators</h1>
+    <p>Plug in your own numbers. These are simplified estimates, not projections you should rely on for real planning.</p>
+  </div>
+</div>
+
+<div class="section" style="padding-top:16px;">
+
+  <div class="calc-full" id="compound">
+    <h2>Compound Interest Calculator</h2>
+    <p class="calc-note">See how a monthly contribution grows over time at a given annual return.</p>
+    <div class="calc-form">
+      <div class="field">
+        <label for="ci-initial">Starting amount ($)</label>
+        <input type="number" id="ci-initial" value="1000" min="0">
+      </div>
+      <div class="field">
+        <label for="ci-monthly">Monthly contribution ($)</label>
+        <input type="number" id="ci-monthly" value="100" min="0">
+      </div>
+      <div class="field">
+        <label for="ci-rate">Estimated annual return (%)</label>
+        <input type="number" id="ci-rate" value="7" min="0" step="0.1">
+      </div>
+      <div class="field">
+        <label for="ci-years">Number of years</label>
+        <input type="number" id="ci-years" value="20" min="1">
+      </div>
+    </div>
+    <div class="calc-result">
+      <div>
+        <div class="big-label">Estimated future value</div>
+        <div class="big-num" id="ci-result">$0</div>
+      </div>
+      <div>
+        <div class="big-label">Total you contributed</div>
+        <div class="big-num" id="ci-contributed" style="color:#666;font-size:22px;">$0</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="calc-full" id="retirement">
+    <h2>Retirement Savings Calculator</h2>
+    <p class="calc-note">A rough estimate of what your savings could grow to by retirement age.</p>
+    <div class="calc-form">
+      <div class="field">
+        <label for="rt-age">Current age</label>
+        <input type="number" id="rt-age" value="35" min="1">
+      </div>
+      <div class="field">
+        <label for="rt-retire">Planned retirement age</label>
+        <input type="number" id="rt-retire" value="65" min="1">
+      </div>
+      <div class="field">
+        <label for="rt-current">Current retirement savings ($)</label>
+        <input type="number" id="rt-current" value="20000" min="0">
+      </div>
+      <div class="field">
+        <label for="rt-monthly">Monthly contribution ($)</label>
+        <input type="number" id="rt-monthly" value="400" min="0">
+      </div>
+      <div class="field">
+        <label for="rt-rate">Estimated annual return (%)</label>
+        <input type="number" id="rt-rate" value="7" min="0" step="0.1">
+      </div>
+    </div>
+    <div class="calc-result">
+      <div>
+        <div class="big-label">Estimated savings at retirement</div>
+        <div class="big-num" id="rt-result">$0</div>
+      </div>
+      <div>
+        <div class="big-label">Years until retirement</div>
+        <div class="big-num" id="rt-years" style="color:#666;font-size:22px;">0</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <a class="logo" href="index.html">
+        <svg width="22" height="22" viewBox="0 0 26 26" fill="none">
+          <path d="M2 20 L8 10 L12 15 L17 6 L24 20 Z" stroke="#C98A2C" stroke-width="1.6" fill="none" stroke-linejoin="round"/>
+        </svg>
+        Mountain State Money
+      </a>
+      <p class="footer-note">Educational content about investing basics, built by two West Virginians. Not personalized financial advice, and not affiliated with any brokerage or advisory firm.</p>
+    </div>
+    <div class="footer-links">
+      <a href="learn.html">Learn</a>
+      <a href="videos.html">Videos</a>
+      <a href="calculators.html">Calculators</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function fmt(n){
+    return '$' + Math.round(n).toLocaleString('en-US');
+  }
+
+  function calcCompound(){
+    const initial = parseFloat(document.getElementById('ci-initial').value) || 0;
+    const monthly = parseFloat(document.getElementById('ci-monthly').value) || 0;
+    const annualRate = parseFloat(document.getElementById('ci-rate').value) || 0;
+    const years = parseFloat(document.getElementById('ci-years').value) || 0;
+    const r = annualRate / 100 / 12;
+    const n = years * 12;
+    let futureValue;
+    if (r === 0) {
+      futureValue = initial + monthly * n;
+    } else {
+      futureValue = initial * Math.pow(1 + r, n) + monthly * ((Math.pow(1 + r, n) - 1) / r);
+    }
+    const contributed = initial + monthly * n;
+    document.getElementById('ci-result').textContent = fmt(futureValue);
+    document.getElementById('ci-contributed').textContent = fmt(contributed);
+  }
+
+  function calcRetirement(){
+    const age = parseFloat(document.getElementById('rt-age').value) || 0;
+    const retireAge = parseFloat(document.getElementById('rt-retire').value) || 0;
+    const current = parseFloat(document.getElementById('rt-current').value) || 0;
+    const monthly = parseFloat(document.getElementById('rt-monthly').value) || 0;
+    const annualRate = parseFloat(document.getElementById('rt-rate').value) || 0;
+    const years = Math.max(retireAge - age, 0);
+    const r = annualRate / 100 / 12;
+    const n = years * 12;
+    let futureValue;
+    if (r === 0) {
+      futureValue = current + monthly * n;
+    } else {
+      futureValue = current * Math.pow(1 + r, n) + monthly * ((Math.pow(1 + r, n) - 1) / r);
+    }
+    document.getElementById('rt-result').textContent = fmt(futureValue);
+    document.getElementById('rt-years').textContent = years;
+  }
+
+  document.querySelectorAll('#compound input').forEach(el => el.addEventListener('input', calcCompound));
+  document.querySelectorAll('#retirement input').forEach(el => el.addEventListener('input', calcRetirement));
+
+  calcCompound();
+  calcRetirement();
+
+  // scroll to hash target on load (for links from home page)
+  if (window.location.hash) {
+    const el = document.querySelector(window.location.hash);
+    if (el) el.scrollIntoView();
+  }
+</script>
+
+</body>
+</html>

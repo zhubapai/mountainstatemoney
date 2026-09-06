@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Videos — Mountain State Money</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+      <path d="M2 20 L8 10 L12 15 L17 6 L24 20 Z" stroke="#C98A2C" stroke-width="1.6" fill="none" stroke-linejoin="round"/>
+    </svg>
+    Mountain State Money
+  </a>
+  <nav>
+    <a href="learn.html">Learn</a>
+    <a href="videos.html" class="active">Videos</a>
+    <a href="calculators.html">Calculators</a>
+    <a href="about.html">About</a>
+  </nav>
+  <button class="nav-toggle" aria-label="Menu">☰</button>
+</header>
+
+<section class="videos">
+  <div class="wrap">
+    <h1>Videos</h1>
+    <p class="sub">One concept per video, 45–90 seconds. Filter by topic or just scroll.</p>
+
+    <div class="video-filter">
+      <button class="filter-pill active" data-filter="all">All</button>
+      <button class="filter-pill" data-filter="Money Basics">Money Basics</button>
+      <button class="filter-pill" data-filter="Building Blocks">Building Blocks</button>
+      <button class="filter-pill" data-filter="Accounts">Accounts</button>
+      <button class="filter-pill" data-filter="Risk & Strategy">Risk & Strategy</button>
+    </div>
+
+    <div class="video-row" id="video-grid">
+      <div class="video-card" data-topic="Building Blocks">
+        <div class="video-thumb"><div class="play-dot"></div></div>
+        <div class="video-title">What is a bond, actually?</div>
+        <div class="video-topic">Building Blocks</div>
+      </div>
+      <div class="video-card" data-topic="Money Basics">
+        <div class="video-thumb"><div class="play-dot"></div></div>
+        <div class="video-title">Compound interest vs. simple interest</div>
+        <div class="video-topic">Money Basics</div>
+      </div>
+      <div class="video-card" data-topic="Accounts">
+        <div class="video-thumb"><div class="play-dot"></div></div>
+        <div class="video-title">Roth vs. Traditional IRA in 90 seconds</div>
+        <div class="video-topic">Accounts</div>
+      </div>
+      <div class="video-card" data-topic="Building Blocks">
+        <div class="video-thumb"><div class="play-dot"></div></div>
+        <div class="video-title">What's an index fund?</div>
+        <div class="video-topic">Building Blocks</div>
+      </div>
+      <div class="video-card" data-topic="Money Basics">
+        <div class="video-thumb"><div class="play-dot"></div></div>
+        <div class="video-title">Saving vs. investing: what's the difference?</div>
+        <div class="video-topic">Money Basics</div>
+      </div>
+      <div class="video-card" data-topic="Risk & Strategy">
+        <div class="video-thumb"><div class="play-dot"></div></div>
+        <div class="video-title">Dollar-cost averaging, explained</div>
+        <div class="video-topic">Risk & Strategy</div>
+      </div>
+      <div class="video-card" data-topic="Building Blocks">
+        <div class="video-thumb"><div class="play-dot"></div></div>
+        <div class="video-title">Mutual funds vs. ETFs</div>
+        <div class="video-topic">Building Blocks</div>
+      </div>
+      <div class="video-card" data-topic="Risk & Strategy">
+        <div class="video-thumb"><div class="play-dot"></div></div>
+        <div class="video-title">What does "diversification" really mean?</div>
+        <div class="video-topic">Risk & Strategy</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <a class="logo" href="index.html">
+        <svg width="22" height="22" viewBox="0 0 26 26" fill="none">
+          <path d="M2 20 L8 10 L12 15 L17 6 L24 20 Z" stroke="#C98A2C" stroke-width="1.6" fill="none" stroke-linejoin="round"/>
+        </svg>
+        Mountain State Money
+      </a>
+      <p class="footer-note">Educational content about investing basics, built by two West Virginians. Not personalized financial advice, and not affiliated with any brokerage or advisory firm.</p>
+    </div>
+    <div class="footer-links">
+      <a href="learn.html">Learn</a>
+      <a href="videos.html">Videos</a>
+      <a href="calculators.html">Calculators</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const pills = document.querySelectorAll('.filter-pill');
+  const cards = document.querySelectorAll('#video-grid .video-card');
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const filter = pill.dataset.filter;
+      cards.forEach(card => {
+        card.style.display = (filter === 'all' || card.dataset.topic === filter) ? '' : 'none';
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
