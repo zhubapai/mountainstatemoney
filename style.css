@@ -84,6 +84,25 @@ nav a:hover, nav a.active{border-bottom-color:var(--amber);}
 @keyframes draw{to{stroke-dashoffset:0;}}
 .chart-caption{font-size:13px;color:#666;margin-top:10px;text-align:right;}
 
+/* wide index chart (homepage, S&P 500 history) */
+.sp500-charts-section{padding-top:8px;}
+.sp500-charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
+.index-chart-visual svg{width:100%;height:auto;display:block;}
+.chart-line-wide{
+  stroke:var(--amber);stroke-width:3;fill:none;
+  stroke-dasharray:930;stroke-dashoffset:930;
+  animation:draw 2.4s ease-out forwards .3s;
+}
+
+/* annual returns bar chart (homepage) */
+.returns-chart-visual svg{width:100%;height:auto;display:block;}
+.bars-grow{
+  transform-origin:450px 168px;
+  animation:growBars 1.1s cubic-bezier(.2,.8,.3,1) forwards .2s;
+  transform:scaleY(0);
+}
+@keyframes growBars{to{transform:scaleY(1);}}
+
 /* why section */
 .why{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--sage-white);}
 .why-inner{max-width:1120px;margin:0 auto;padding:56px 28px;display:grid;grid-template-columns:220px 1fr;gap:48px;}
@@ -212,6 +231,7 @@ footer{border-top:1px solid var(--line);background:var(--sage-white);}
   .calc-row{grid-template-columns:1fr;}
   .calc-form{grid-template-columns:1fr;}
   .about-grid{grid-template-columns:1fr;}
+  .sp500-charts-grid{grid-template-columns:1fr;gap:32px;}
   .article-wrap h1{font-size:28px;}
   .article-dek{font-size:17px;}
   .article-body{font-size:16px;}
